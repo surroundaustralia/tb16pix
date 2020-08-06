@@ -8,8 +8,26 @@ This API and the data within it have been created for the OGC's Testbed 16 which
 
 ***This system is incomplete and will be added to continuously in the second half of 2020.***
 
-## Endpoints
-* TB16Pix Dataset - 
+## URIs for testing
+### Persistent URIs
+# | Resource | URI
+--- | --- | ---
+1. | TB16Pix Dataset | <https://w3id.org/dggs/tb16pix>
+2. | Collections | <https://w3id.org/dggs/tb16pix/resolution/>
+3. | Collection 'Resolution 2' | <https://w3id.org/dggs/tb16pix/resolution/2>
+4. | Features within 'Resolution 2' | <https://w3id.org/dggs/tb16pix/resolution/2/cell/>
+5. | Feature 'Cell N21' | <https://w3id.org/dggs/tb16pix/cell/N21> 
+
+### OGC API URIs
+*These are numbered with correspondence to the PIDs above.*
+
+# | Resource | URI
+--- | --- | ---
+1. | API Landing Page | <https://dggs.org/> 
+2. | Collections | <https://dggs.org/collections> 
+3. | Collection 'Resolution 2' | <https://dggs.org/collections/2>
+4. | Features within 'Resolution 2' | <https://dggs.org/collections/2/items>
+5. | Feature 'Cell N21' | <https://dggs.org/collections/2/items/N21>
 
 ## License
 The content of this repository are licensed using the [GPL 3.0 license](https://www.gnu.org/licenses/quick-guide-gplv3.html). See the the [LICENSE file](LICENSE) for details

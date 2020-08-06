@@ -4,9 +4,9 @@
   <dl>
     <dt>URI</dt>
     {% if LOCAL_URIS %}
-      <dd><a href="{{ url_for("object", uri=uri) }}">{{ uri }}</a></dd>
+      <dd><strong><a href="{{ url_for("object", uri=uri) }}">{{ uri }}</a></strong></dd>
     {% else %}
-      <dd><a href="{{ uri }}">{{ uri }}</a></dd>
+      <dd><strong><a href="{{ uri }}">{{ uri }}</a></strong></dd>
     {% endif %}
     <dt>Description</dt>
     <dd>{{ description|safe }}</dd>

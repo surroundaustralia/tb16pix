@@ -150,6 +150,10 @@ def object():
         )
     elif request.values.get("uri") == URI_BASE_RESOLUTION:
         return redirect(url_for("collections"))
+    elif request.values.get("uri").endswith("/cell/"):
+        # https://w3id.org/dggs/tb16pix/resolution/2/cell/
+        resolution = request.values.get("uri").split("/")[-3]
+        return redirect(url_for("items", collection_id=resolution))
     elif request.values.get("uri").startswith(URI_BASE_RESOLUTION):
         resolution = request.values.get("uri").split("/")[-1]
         return redirect(url_for("collection", collection_id=resolution))
