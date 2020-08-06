@@ -18,18 +18,24 @@
         <div style="grid-column: 1; grid-row: 2;">
             <dl>
               <dt>URI</dt>
-              <dd><strong><a href="{{ uri }}">{{ uri }}</a></strong></dd>
+              {% if LOCAL_URIS %}
+                <dd><strong><a href="{{ url_for("object", uri=uri) }}">{{ uri }}</a></strong></dd>
+              {% else %}
+                <dd><strong><a href="{{ uri }}">{{ uri }}</a></strong></dd>
+              {% endif %}
               {% if comment is not none %}
               <dt>Description</dt>
               <dd>{{ comment|safe }}</dd>
               {% endif %}
               {% if parent_container_uri is not none %}
-              <dt>Parent Container</dt>
-              {% if parent_container_label is not none %}
-              <dd><a href="{{ parent_container_uri }}">{{ parent_container_uri }}</a></dd>
-              {% else %}
-              <dd><a href="{{ parent_container_uri }}">{{ parent_container_label }}</a></dd>
-              {% endif %}
+                <dt>Parent Container</dt>
+                {% if parent_container_label is not none %}
+                  {% if LOCAL_URIS %}
+                    <dd><a href="{{ url_for("object", uri=parent_container_uri) }}">{{ parent_container_uri }}</a></dd>
+                  {% else %}
+                    <dd><a href="{{ parent_container_uri }}">{{ parent_container_uri }}</a></dd>
+                  {% endif %}
+                {% endif %}
               {% endif %}
             </dl>
         </div>
