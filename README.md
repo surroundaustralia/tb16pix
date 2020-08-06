@@ -10,7 +10,7 @@ This API and the data within it have been created for the OGC's Testbed 16 which
 
 ## URIs for testing
 ### Persistent URIs
-# | Resource | URI
+No. | Resource | URI
 --- | --- | ---
 1. | TB16Pix Dataset | <https://w3id.org/dggs/tb16pix>
 2. | Collections | <https://w3id.org/dggs/tb16pix/resolution/>
@@ -21,7 +21,7 @@ This API and the data within it have been created for the OGC's Testbed 16 which
 ### OGC API URIs
 *These are numbered with correspondence to the PIDs above.*
 
-# | Resource | URI
+No. | Resource | URI
 --- | --- | ---
 1. | API Landing Page | <https://dggs.org/> 
 2. | Collections | <https://dggs.org/collections> 
