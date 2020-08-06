@@ -77,7 +77,7 @@ def collections():
         "https://w3id.org/dggs/tb16pix/resolution/",
         "Resolutions",
         "DGGs are made of hierarchical layers of cells. In TB16Pix, these layers are called Resolutions",
-        "https://w3id.org/dggs/tb16pix/",
+        "https://w3id.org/dggs/tb16pix",
         "TB16Pix Dataset",
         collections,
         len(collections)
@@ -136,6 +136,8 @@ def object():
             400,
             "You must supply a TB16Pix URI with the parameter ?uri= for this endpoint"
         )
+    elif request.values.get("uri") == "https://w3id.org/dggs/tb16pix":
+        return redirect(url_for("landing_page"))
     elif request.values.get("uri") == str(URI_BASE_CELL.Earth):
         local = Graph()
         local.bind("dggs", DGGS)
@@ -146,6 +148,8 @@ def object():
             status=200,
             mimetype="text/plain"
         )
+    elif request.values.get("uri") == URI_BASE_RESOLUTION:
+        return redirect(url_for("collections"))
     elif request.values.get("uri").startswith(URI_BASE_RESOLUTION):
         resolution = request.values.get("uri").split("/")[-1]
         return redirect(url_for("collection", collection_id=resolution))

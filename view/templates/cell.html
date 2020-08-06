@@ -3,11 +3,19 @@
   <h1>Feature: {{ label }}</h1>
   <dl>
     <dt>URI</dt>
-    <dd><a href="{{ uri }}">{{ uri }}</a></dd>
+    {% if LOCAL_URIS %}
+      <dd><a href="{{ url_for("object", uri=uri) }}">{{ uri }}</a></dd>
+    {% else %}
+      <dd><a href="{{ uri }}">{{ uri }}</a></dd>
+    {% endif %}
     <dt>Label</dt>
     <dd>{{ label }}</dd>
     <dt>Is Part of Collection</dt>
-    <dd><a href="{{ isPartOf }}">{{ isPartOf }}</a></dd>
+      {% if LOCAL_URIS %}
+      <dd><a href="{{ url_for("object", uri=isPartOf) }}">{{ isPartOf }}</a></dd>
+    {% else %}
+      <dd><a href="{{ isPartOf }}">{{ isPartOf }}</a></dd>
+    {% endif %}
     <dt>Neighbours</dt>
     <dd>
       <div style="display: grid; grid-template-columns: 100px 100px 100px; grid-template-rows: 50px 50px 50px; text-align:center;">

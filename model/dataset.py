@@ -10,7 +10,7 @@ class Dataset:
     def __init__(
         self,
     ):
-        self.uri = URI_BASE_DATASET
+        self.uri = "https://w3id.org/dggs/tb16pix"
         self.label = "Testbed 16 Pix Discrete Global Grid"
         self.description = """This is an instance of the [Open Geospatial Consortium (OGC)](https://www.ogc.org/) 's "[OGC API - Features](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0)" API that delivers the authoritative content for the *Testbed 16 Pix* (TB16Pix) which is a [Discreet Global Grid](http://docs.opengeospatial.org/as/15-104r5/15-104r5.html#4), that is, a multi-layered, tessellated, set of spatial grid cells used for position identification on the Earth's surface. 
 

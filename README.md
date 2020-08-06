@@ -8,6 +8,8 @@ This API and the data within it have been created for the OGC's Testbed 16 which
 
 ***This system is incomplete and will be added to continuously in the second half of 2020.***
 
+## Endpoints
+* TB16Pix Dataset - 
 
 ## License
 The content of this repository are licensed using the [GPL 3.0 license](https://www.gnu.org/licenses/quick-guide-gplv3.html). See the the [LICENSE file](LICENSE) for details
