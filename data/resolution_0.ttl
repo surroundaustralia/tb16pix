@@ -1,0 +1,72 @@
+PREFIX dggs: <https://w3id.org/dggs/abstract/ont/>          # the ontology of the Abstract Specification
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tb16: <https://w3id.org/dggs/tb16pix/>           # the dataset URI for TB16 PIX
+PREFIX tb16c: <https://w3id.org/dggs/tb16pix/cell/>     # A Cell within TB16 PIX
+PREFIX tb16l: <https://w3id.org/dggs/tb16pix/resolution/>    # A Resolution within TB16 PIX
+
+
+tb16c:N a dggs:Cell ;
+    rdfs:label "Cell N" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:O ,
+        tb16c:P ,
+        tb16c:Q ,
+        tb16c:R ;
+    dggs:parent tb16l:Earth ;
+.
+
+tb16c:O a dggs:Cell ;
+    rdfs:label "Cell O" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:N ,
+        tb16c:R ,
+        tb16c:P ,
+        tb16c:S ;
+    dggs:parent tb16l:Earth ;
+.
+
+tb16c:P a dggs:Cell ;
+    rdfs:label "Cell P" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:N ,
+        tb16c:O ,
+        tb16c:Q ,
+        tb16c:S ;
+    dggs:parent tb16l:Earth ;
+.
+
+tb16c:Q a dggs:Cell ;
+    rdfs:label "Cell Q" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:N ,
+        tb16c:P ,
+        tb16c:R ,
+        tb16c:S ;
+    dggs:parent tb16l:Earth ;
+.
+
+tb16c:R a dggs:Cell ;
+    rdfs:label "Cell R" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:N ,
+        tb16c:Q ,
+        tb16c:O ,
+        tb16c:S ;
+    dggs:parent tb16l:Earth ;
+.
+
+tb16c:S a dggs:Cell ;
+    rdfs:label "Cell S" ;
+    dggs:resolution 0 ;
+    dggs:definedNeighbours
+        tb16c:O ,
+        tb16c:P ,
+        tb16c:Q ,
+        tb16c:R ;
+    dggs:parent tb16l:Earth ;
+.

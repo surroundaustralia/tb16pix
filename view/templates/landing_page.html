@@ -1,0 +1,22 @@
+{% extends "page.html" %}
+{% block content %}
+  <h1>Landing Page</h1>
+  <pre>
+{
+  "title": "TB16Pix Discrete Global Grid",
+  "description": "This is an instance of the [Open Geospatial Consortium (OGC)](https://www.ogc.org/) 's "[OGC API - Features](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0)" API that delivers the authoritative content for the *Testbed 16 Pix* (TB16PIx) which is a [Discreet Global Grid](http://docs.opengeospatial.org/as/15-104r5/15-104r5.html#4), that is, a multi-layered, tessellated, set of spatial grid cells used for position identification on the Earth's surface.",
+  "links": [
+    { "href": "{{ url_for("landing_page") }}",
+      "rel": "self", "type": "application/json", "title": "this document" },
+    { "href": "http://data.example.org/api",
+      "rel": "service-desc", "type": "application/vnd.oai.openapi+json;version=3.0", "title": "the API definition" },
+    { "href": "http://data.example.org/api.html",
+      "rel": "service-doc", "type": "text/html", "title": "the API documentation" },
+    { "href": "{{ url_for("conformance") }}",
+      "rel": "conformance", "type": "application/json", "title": "OGC API conformance classes implemented by this server" },
+    { "href": "{{ url_for("collections") }}",
+      "rel": "data", "type": "application/json", "title": "Metadata about the feature collections" }
+  ]
+}
+  </pre>
+{% endblock %}

@@ -1,0 +1,64 @@
+PREFIX dggs: <https://w3id.org/dggs/abstract/ont/>          # the ontology of the Abstract Specification
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tb16l: <https://w3id.org/dggs/tb16pix/resolution/>    # A Resolution within TB16 PIX
+
+
+tb16l:0 a dggs:Resolution ;
+    rdfs:label "Resolution 0" ;
+    dggs:upperResolution tb16l:Earth ;
+    dggs:lowerResolution tb16l:1 ;
+.
+
+tb16l:1 a dggs:Resolution ;
+    rdfs:label "Resolution 1" ;
+    dggs:upperResolution tb16l:0 ;
+    dggs:lowerResolution tb16l:2 ;
+.
+
+tb16l:2 a dggs:Resolution ;
+    rdfs:label "Resolution 2" ;
+    dggs:upperResolution tb16l:1 ;
+    dggs:lowerResolution tb16l:3 ;
+.
+
+tb16l:3 a dggs:Resolution ;
+    rdfs:label "Resolution 3" ;
+    dggs:upperResolution tb16l:2 ;
+    dggs:lowerResolution tb16l:4 ;
+.
+
+tb16l:4 a dggs:Resolution ;
+    rdfs:label "Resolution 4" ;
+    dggs:upperResolution tb16l:3 ;
+    dggs:lowerResolution tb16l:5 ;
+.
+
+tb16l:5 a dggs:Resolution ;
+    rdfs:label "Resolution 5" ;
+    dggs:upperResolution tb16l:4 ;
+    dggs:lowerResolution tb16l:6 ;
+.
+
+tb16l:6 a dggs:Resolution ;
+    rdfs:label "Resolution 6" ;
+    dggs:upperResolution tb16l:5 ;
+    dggs:lowerResolution tb16l:7 ;
+.
+
+tb16l:7 a dggs:Resolution ;
+    rdfs:label "Resolution 7" ;
+    dggs:upperResolution tb16l:6 ;
+    dggs:lowerResolution tb16l:8 ;
+.
+
+tb16l:8 a dggs:Resolution ;
+    rdfs:label "Resolution 8" ;
+    dggs:upperResolution tb16l:7 ;
+    dggs:lowerResolution tb16l:9 ;
+.
+
+tb16l:9 a dggs:Resolution ;
+    rdfs:label "Resolution 9" ;
+    dggs:upperResolution tb16l:8 ;
+.
+

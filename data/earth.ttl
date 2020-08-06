@@ -1,0 +1,17 @@
+PREFIX dggs: <https://w3id.org/dggs/abstract/ont/>          # the ontology of the Abstract Specification
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tb16l: <https://w3id.org/dggs/tb16pix/resolution/>    # A Resolution within TB16 PIX
+PREFIX tb16c: <https://w3id.org/dggs/tb16pix/cell/>     # A Cell within TB16 PIX
+
+
+tb16c:Earth a dggs:Resolution , dggs:Cell ;
+    rdfs:label "Earth" ;
+    dggs:lowerResolution tb16l:0 ;
+    dggs:children
+        tb16l:N ,
+        tb16l:O ,
+        tb16l:P ,
+        tb16l:Q ,
+        tb16l:R ,
+        tb16l:S ;
+.

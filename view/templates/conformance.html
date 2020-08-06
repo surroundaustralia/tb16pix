@@ -1,0 +1,11 @@
+{% extends "page.html" %}
+{% block content %}
+  <h1>Conformance</h1>
+  <p>This API conforms to the following conformance classes:</p>
+  <ul>
+    <li><a href="http://www.opengis.net/spec/ogcapi-features-1/1.0/req/core">Open API Core</a></li>
+    <li><a href="http://www.opengis.net/spec/ogcapi-features-1/1.0/req/oas30">OpenAPI 3.0</a></li>
+    <li><a href="http://www.opengis.net/spec/ogcapi-features-1/1.0/req/html">OpenAPI HTML</a></li>
+  </ul>
+  <p>Not that this API does <em>not</em> conform to <a href="http://www.opengis.net/spec/ogcapi-features-1/1.0/req/geojson">OpenAPI GeoJSON</a> since the geometry of its spatial features doesn't use a WGS84 or related coordinate reference system, instead it uses the TB16Pix DGGS.</p>
+{% endblock %}
