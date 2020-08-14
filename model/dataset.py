@@ -48,12 +48,12 @@ class DatasetRenderer(Renderer):
         item_graph.bind("dggs", DGGS)
         item_uri = URIRef(self.dataset.uri)
         item_id = self.dataset.uri.split("/")[-1]
-        item_graph.add((item_uri, RDF.type, DGGS.Cell))
-        item_graph.add((item_uri, RDFS.label, Literal("Cell {}".format(item_id))))
+        item_graph.add((item_uri, RDF.type, DGGS.Zone))
+        item_graph.add((item_uri, RDFS.label, Literal("Zone {}".format(item_id))))
 
         for neighbour in calculate_neighbours(item_id):
             direction_uri = URIRef(URI_BASE_DATASET[neighbour[0].title()])
-            neighbour_uri = URIRef(URI_BASE_CELL[neighbour[1]])
+            neighbour_uri = URIRef(URI_BASE_ZONE[neighbour[1]])
             bn = BNode()
             item_graph.add((bn, DGGS.neighbour, neighbour_uri))
             item_graph.add((bn, DGGS.direction, direction_uri))

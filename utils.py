@@ -83,7 +83,7 @@ def make_cached_graph():
 def get_collections():
     collections = []
     g = make_cached_graph()
-    for s in g.subjects(predicate=RDF.type, object=DGGS.Resolution):
+    for s in g.subjects(predicate=RDF.type, object=DGGS.Grid):
         for o in g.objects(subject=s, predicate=RDFS.label):
             collections.append((str(s), str(o)))
 

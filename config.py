@@ -18,8 +18,8 @@ PICKLED_G_FILE = os.path.join(APP_DIR, "data", "DATA.pickle")
 DGGSP = Namespace("https://w3id.org/dggs/abstract")
 DGGS = Namespace("https://w3id.org/dggs/abstract/ont/")
 URI_BASE_DATASET = Namespace("https://w3id.org/dggs/tb16pix/")
-URI_BASE_CELL = Namespace("https://w3id.org/dggs/tb16pix/cell/")
-URI_BASE_RESOLUTION = Namespace("https://w3id.org/dggs/tb16pix/resolution/")
+URI_BASE_ZONE = Namespace("https://w3id.org/dggs/tb16pix/zone/")
+URI_BASE_RESOLUTION = Namespace("https://w3id.org/dggs/tb16pix/grid/")
 
 # rHealPix
 WGS84_TB16 = Ellipsoid(a=6378137.0, b=6356752.314140356, e=0.0578063088401, f=0.003352810681182, lon_0=-131.25)

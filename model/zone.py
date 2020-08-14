@@ -5,23 +5,23 @@ from config import *
 from utils import calculate_neighbours
 
 
-class Cell:
+class Zone:
     def __init__(
         self,
-        cell_id
+        zone_id
     ):
-        self.uri = URI_BASE_CELL[cell_id]
-        self.label = "Cell {}".format(cell_id)
-        self.neighbours = [(URI_BASE_CELL[x[1]], x[1], x[0]) for x in calculate_neighbours(cell_id)]
-        self.isPartOf = URI_BASE_RESOLUTION[str(len(cell_id) - 1)]
+        self.uri = URI_BASE_ZONE[zone_id]
+        self.label = "Zone {}".format(zone_id)
+        self.neighbours = [(URI_BASE_ZONE[x[1]], x[1], x[0]) for x in calculate_neighbours(zone_id)]
+        self.isPartOf = URI_BASE_RESOLUTION[str(len(zone_id) - 1)]
 
 
-class CellRenderer(Renderer):
-    def __init__(self, request, cell_id):
-        self.cell = Cell(cell_id)
+class ZoneRenderer(Renderer):
+    def __init__(self, request, zone_id):
+        self.zone = Zone(zone_id)
         self.profiles = {"dggs": profile_dggs}
 
-        super().__init__(request, self.cell.uri, self.profiles, "dggs")
+        super().__init__(request, self.zone.uri, self.profiles, "dggs")
 
     def render(self):
         # try returning alt profile
@@ -37,14 +37,14 @@ class CellRenderer(Renderer):
     def _render_dggs_rdf(self):
         item_graph = Graph()
         item_graph.bind("dggs", DGGS)
-        item_uri = URIRef(self.cell.uri)
-        item_id = self.cell.uri.split("/")[-1]
-        item_graph.add((item_uri, RDF.type, DGGS.Cell))
-        item_graph.add((item_uri, RDFS.label, Literal("Cell {}".format(item_id))))
+        item_uri = URIRef(self.zone.uri)
+        item_id = self.zone.uri.split("/")[-1]
+        item_graph.add((item_uri, RDF.type, DGGS.Zone))
+        item_graph.add((item_uri, RDFS.label, Literal("Zone {}".format(item_id))))
 
         for neighbour in calculate_neighbours(item_id):
             direction_uri = URIRef(URI_BASE_DATASET[neighbour[0].title()])
-            neighbour_uri = URIRef(URI_BASE_CELL[neighbour[1]])
+            neighbour_uri = URIRef(URI_BASE_ZONE[neighbour[1]])
             bn = BNode()
             item_graph.add((bn, DGGS.neighbour, neighbour_uri))
             item_graph.add((bn, DGGS.direction, direction_uri))
@@ -58,13 +58,13 @@ class CellRenderer(Renderer):
 
     def _render_dggs_html(self):
         _template_context = {
-            "uri": self.cell.uri,
-            "label": self.cell.label,
-            "neighbours": self.cell.neighbours,
-            "isPartOf": self.cell.isPartOf,
+            "uri": self.zone.uri,
+            "label": self.zone.label,
+            "neighbours": self.zone.neighbours,
+            "isPartOf": self.zone.isPartOf,
         }
 
         return Response(
-            render_template("cell.html", **_template_context),
+            render_template("zone.html", **_template_context),
             headers=self.headers,
         )

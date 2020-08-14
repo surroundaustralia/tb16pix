@@ -14,7 +14,7 @@ from flask import (
 )
 from config import *
 from pyldapi import Renderer, ContainerRenderer
-from model.cell import CellRenderer
+from model.zone import ZoneRenderer
 from model.dataset import DatasetRenderer
 
 from utils import make_cached_graph, calculate_neighbours, get_collections
@@ -75,8 +75,8 @@ def collections():
     return ContainerRenderer(
         request,
         "https://w3id.org/dggs/tb16pix/resolution/",
-        "Resolutions",
-        "DGGs are made of hierarchical layers of cells. In TB16Pix, these layers are called Resolutions",
+        "Grids",
+        "DGGs are made of hierarchical layers of cells. In TB16Pix, these layers are called Grids",
         "https://w3id.org/dggs/tb16pix",
         "TB16Pix Dataset",
         collections,
@@ -95,7 +95,7 @@ def collection(collection_id):
     return render_template(
         "collection.html",
         collection_id=collection_id,
-        collection_name="Resolution " + str(collection_id)
+        collection_name="Grid " + str(collection_id)
     )
 
 
@@ -106,24 +106,24 @@ def items(collection_id):
         if LOCAL_URIS:
             features.append((
                 url_for("item", collection_id=collection_id, item_id=str(cell)),
-                "Cell {}".format(str(cell))
+                "Zone {}".format(str(cell))
             ))
         else:
             features.append((
-                URI_BASE_CELL[str(cell)],
-                "Cell {}".format(str(cell))
+                URI_BASE_ZONE[str(cell)],
+                "Zone {}".format(str(cell))
             ))
 
     return render_template(
         "items.html",
-        collection_name="Resolution " + str(collection_id),
+        collection_name="Grid " + str(collection_id),
         items=features
     )
 
 
 @app.route("/collections/<string:collection_id>/items/<string:item_id>")
 def item(collection_id, item_id):
-    return CellRenderer(request, item_id).render()
+    return ZoneRenderer(request, item_id).render()
 
 
 @app.route("/object")
@@ -138,7 +138,7 @@ def object():
         )
     elif request.values.get("uri") == "https://w3id.org/dggs/tb16pix":
         return redirect(url_for("landing_page"))
-    elif request.values.get("uri") == str(URI_BASE_CELL.Earth):
+    elif request.values.get("uri") == str(URI_BASE_ZONE.Earth):
         local = Graph()
         local.bind("dggs", DGGS)
         for s, p, o in g.DATA.triples((URIRef(request.values.get("uri")), None, None)):
@@ -157,7 +157,7 @@ def object():
     elif request.values.get("uri").startswith(URI_BASE_RESOLUTION):
         resolution = request.values.get("uri").split("/")[-1]
         return redirect(url_for("collection", collection_id=resolution))
-    elif request.values.get("uri").startswith(URI_BASE_CELL):
+    elif request.values.get("uri").startswith(URI_BASE_ZONE):
         cell_id = request.values.get("uri").split("/")[-1]
         resolution = "resolution-" + str(len(cell_id) - 1)
         return redirect(url_for("item", collection_id=resolution, item_id=cell_id))

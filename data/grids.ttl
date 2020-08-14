@@ -1,0 +1,64 @@
+PREFIX dggs: <https://w3id.org/dggs/abstract/ont/>          # the ontology of the Abstract Specification
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tb16l: <https://w3id.org/dggs/tb16pix/grid/>    # A Grid within TB16 PIX
+
+
+tb16l:0 a dggs:Grid ;
+    rdfs:label "Grid 0" ;
+    dggs:upperGrid tb16l:Earth ;
+    dggs:lowerGrid tb16l:1 ;
+.
+
+tb16l:1 a dggs:Grid ;
+    rdfs:label "Grid 1" ;
+    dggs:upperGrid tb16l:0 ;
+    dggs:lowerGrid tb16l:2 ;
+.
+
+tb16l:2 a dggs:Grid ;
+    rdfs:label "Grid 2" ;
+    dggs:upperGrid tb16l:1 ;
+    dggs:lowerGrid tb16l:3 ;
+.
+
+tb16l:3 a dggs:Grid ;
+    rdfs:label "Grid 3" ;
+    dggs:upperGrid tb16l:2 ;
+    dggs:lowerGrid tb16l:4 ;
+.
+
+tb16l:4 a dggs:Grid ;
+    rdfs:label "Grid 4" ;
+    dggs:upperGrid tb16l:3 ;
+    dggs:lowerGrid tb16l:5 ;
+.
+
+tb16l:5 a dggs:Grid ;
+    rdfs:label "Grid 5" ;
+    dggs:upperGrid tb16l:4 ;
+    dggs:lowerGrid tb16l:6 ;
+.
+
+tb16l:6 a dggs:Grid ;
+    rdfs:label "Grid 6" ;
+    dggs:upperGrid tb16l:5 ;
+    dggs:lowerGrid tb16l:7 ;
+.
+
+tb16l:7 a dggs:Grid ;
+    rdfs:label "Grid 7" ;
+    dggs:upperGrid tb16l:6 ;
+    dggs:lowerGrid tb16l:8 ;
+.
+
+tb16l:8 a dggs:Grid ;
+    rdfs:label "Grid 8" ;
+    dggs:upperGrid tb16l:7 ;
+    dggs:lowerGrid tb16l:9 ;
+.
+
+tb16l:9 a dggs:Grid ;
+    rdfs:label "Grid 9" ;
+    dggs:upperGrid tb16l:8 ;
+.
+
