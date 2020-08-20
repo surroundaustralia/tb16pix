@@ -14,6 +14,8 @@ from flask import (
 )
 from config import *
 from pyldapi import Renderer, ContainerRenderer
+from model.earth import EarthRenderer
+from model.cell import CellRenderer
 from model.zone import ZoneRenderer
 from model.dataset import DatasetRenderer
 
@@ -123,7 +125,11 @@ def items(collection_id):
 
 @app.route("/collections/<string:collection_id>/items/<string:item_id>")
 def item(collection_id, item_id):
-    return ZoneRenderer(request, item_id).render()
+    item_id = item_id.split("?")[0]
+    if item_id == "Earth":
+        return EarthRenderer(request, item_id).render()
+    else:
+        return ZoneRenderer(request, item_id).render()
 
 
 @app.route("/object")
@@ -139,28 +145,23 @@ def object():
     elif request.values.get("uri") == "https://w3id.org/dggs/tb16pix":
         return redirect(url_for("landing_page"))
     elif request.values.get("uri") == str(URI_BASE_ZONE.Earth):
-        local = Graph()
-        local.bind("dggs", DGGS)
-        for s, p, o in g.DATA.triples((URIRef(request.values.get("uri")), None, None)):
-            local.add((s, p, o))
-        return Response(
-            local.serialize(format="turtle").decode(),
-            status=200,
-            mimetype="text/plain"
-        )
-    elif request.values.get("uri") == URI_BASE_RESOLUTION:
+        return EarthRenderer(request, "Earth").render()
+    elif request.values.get("uri") == URI_BASE_GRID:
         return redirect(url_for("collections"))
     elif request.values.get("uri").endswith("/cell/"):
         # https://w3id.org/dggs/tb16pix/resolution/2/cell/
         resolution = request.values.get("uri").split("/")[-3]
         return redirect(url_for("items", collection_id=resolution))
-    elif request.values.get("uri").startswith(URI_BASE_RESOLUTION):
+    elif request.values.get("uri").startswith(URI_BASE_GRID):
         resolution = request.values.get("uri").split("/")[-1]
         return redirect(url_for("collection", collection_id=resolution))
     elif request.values.get("uri").startswith(URI_BASE_ZONE):
-        cell_id = request.values.get("uri").split("/")[-1]
-        resolution = "resolution-" + str(len(cell_id) - 1)
-        return redirect(url_for("item", collection_id=resolution, item_id=cell_id))
+        zone_id = request.values.get("uri").split("/")[-1]
+        resolution = "resolution-" + str(len(zone_id) - 1)
+        return redirect(url_for("item", collection_id=resolution, item_id=zone_id))
+    elif request.values.get("uri").startswith(URI_BASE_CELL):
+        cell_id = request.values.get("uri").split("/")[-1].split("?")[0]
+        return CellRenderer(request, cell_id).render()
     else:
         return render_api_error(
             "URI not known",

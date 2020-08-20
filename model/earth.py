@@ -5,23 +5,21 @@ from config import *
 from utils import calculate_neighbours, calculate_children, calculate_parent
 
 
-class Zone:
+class Earth:
     def __init__(
         self,
         zone_id
     ):
         self.uri = URI_BASE_ZONE[zone_id]
         self.label = "Zone {}".format(zone_id)
-        self.parent = calculate_parent(zone_id)
-        self.neighbours = [(URI_BASE_ZONE[x[1]], x[1], x[0]) for x in calculate_neighbours(zone_id)]
+        self.parent = None
+        self.neighbours = []
         self.children = calculate_children(zone_id)
-        self.isPartOf = URI_BASE_GRID[str(len(zone_id) - 1)]
-        self.defaultGeometry = (URI_BASE_CELL[zone_id], "Cell " + zone_id)
 
 
-class ZoneRenderer(Renderer):
+class EarthRenderer(Renderer):
     def __init__(self, request, zone_id):
-        self.zone = Zone(zone_id)
+        self.zone = Earth(zone_id)
         self.profiles = {"dggs": profile_dggs}
         super().__init__(request, self.zone.uri, self.profiles, "dggs")
 
@@ -42,26 +40,13 @@ class ZoneRenderer(Renderer):
         GEO = Namespace("http://www.opengis.net/ont/geosparql#")
         item_graph.bind("geo", GEO)
         GEOX = Namespace("https://linked.data.gov.au/def/geox#")
-        item_graph.bind("geox", GEOX)
         item_uri = URIRef(self.zone.uri)
         item_id = self.zone.uri.split("/")[-1]
         item_graph.add((item_uri, RDF.type, DGGS.Zone))
         item_graph.add((item_uri, RDFS.label, Literal("Zone {}".format(item_id))))
 
-        item_graph.add((item_uri, GEO.sfWithin, URIRef(URI_BASE_ZONE[self.zone.parent[0]])))
-
-        for neighbour in calculate_neighbours(item_id):
-            direction_uri = URIRef(URI_BASE_DATASET[neighbour[0].title()])
-            neighbour_uri = URIRef(URI_BASE_ZONE[neighbour[1]])
-            bn = BNode()
-            item_graph.add((bn, DGGS.neighbour, neighbour_uri))
-            item_graph.add((bn, DGGS.direction, direction_uri))
-            item_graph.add((item_uri, DGGS.directionalisedNeighbour, bn))
-
-            item_graph.add((item_uri, GEO.sfTouches, URIRef(URI_BASE_ZONE[neighbour[1]])))
-
-        for c in range(9):
-            item_graph.add((item_uri, GEO.sfContains, URIRef(self.zone.uri + str(c))))
+        for c in ["N", "O", "P", "Q", "R", "S"]:
+            item_graph.add((item_uri, GEO.sfContains, URIRef(URI_BASE_ZONE + c)))
 
         item_graph.add((item_uri, GEO.hasDefaultGeometry, URIRef(URI_BASE_CELL[item_id])))
 
@@ -77,12 +62,10 @@ class ZoneRenderer(Renderer):
             "label": self.zone.label,
             "parent": self.zone.parent,
             "neighbours": self.zone.neighbours,
-            "children": self.zone.children,
-            "isPartOf": self.zone.isPartOf,
-            "defaultGeometry": self.zone.defaultGeometry,
+            "children": self.zone.children
         }
 
         return Response(
-            render_template("zone.html", **_template_context),
+            render_template("earth.html", **_template_context),
             headers=self.headers,
         )

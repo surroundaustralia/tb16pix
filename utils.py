@@ -7,45 +7,47 @@ from config import *
 from rhealpixdggs.dggs import Cell
 
 
-def calculate_level(cell_id):
-    if cell_id == "Earth":
+def calculate_level(zone_id):
+    if zone_id == "Earth":
         return "Earth"
     else:
-        return len(cell_id) - 1
+        return len(zone_id) - 1
 
 
-def calculate_parent(cell_id):
-    if cell_id == "Earth":
+def calculate_parent(zone_id):
+    if zone_id == "Earth":
         return None
-    elif len(cell_id) == 1:
-        return "Earth"
+    elif len(zone_id) == 1:
+        return URI_BASE_ZONE + "Earth", "Earth"
     else:  # <LETTER>...<LETTER><0-8>*9
-        return cell_id[:-1]
+        return URI_BASE_ZONE + zone_id[:-1], zone_id[:-1]
 
 
-def calculate_children(cell_id):
-    if cell_id == "Earth":
-        return ["N", "O", "P", "Q", "R", "S"]
+def calculate_children(zone_id):
+    if zone_id == "Earth":
+        return [(URI_BASE_ZONE + zone_id + str(n), zone_id + str(n)) for n in ["N", "O", "P", "Q", "R", "S"]]
     else:
-        return [cell_id + str(n) for n in range(8)]
+        if len(zone_id) < 10:
+            return [(URI_BASE_ZONE + zone_id + str(n), zone_id + str(n)) for n in range(8)]
+        else:
+            return None
 
 
-def _suid_from_string(cell_id):
-    if cell_id == "Earth":
+def _suid_from_string(zone_id):
+    if zone_id == "Earth":
         return "Earth"
     else:
-
-        if len(cell_id) == 1:
-            return [cell_id[0]]
+        if len(zone_id) == 1:
+            return [zone_id[0]]
         else:
-            return [cell_id[0]] + [int(x) for x in cell_id[1:]]
+            return [zone_id[0]] + [int(x) for x in zone_id[1:]]
 
 
-def calculate_neighbours(cell_id):
-    if cell_id == "Earth":
+def calculate_neighbours(zone_id):
+    if zone_id == "Earth":
         return None
     else:
-        c = Cell(TB16Pix, _suid_from_string(cell_id))
+        c = Cell(TB16Pix, _suid_from_string(zone_id))
         neighbours = []
         for k, v in sorted(c.neighbors().items()):
             neighbours.append((k, str(v)))
