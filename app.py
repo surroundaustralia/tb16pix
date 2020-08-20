@@ -148,7 +148,7 @@ def object():
         return EarthRenderer(request, "Earth").render()
     elif request.values.get("uri") == URI_BASE_GRID:
         return redirect(url_for("collections"))
-    elif request.values.get("uri").endswith("/cell/"):
+    elif request.values.get("uri").endswith("/zone/"):
         # https://w3id.org/dggs/tb16pix/resolution/2/cell/
         resolution = request.values.get("uri").split("/")[-3]
         return redirect(url_for("items", collection_id=resolution))
@@ -182,7 +182,7 @@ def about():
     content = content.replace(
         "catprez/view/style/", request.url_root + "style/"
     )
-    contents = Markup(markdown.markdown(content))
+    contents = Markup(markdown.markdown(content, extensions=['tables']))
 
     return render_template(
         "about.html",

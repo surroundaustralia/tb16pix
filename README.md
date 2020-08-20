@@ -14,10 +14,10 @@ This API and the data within it have been created for the OGC's Testbed 16 which
 No | Resource | URI
 --- | --- | ---
 1 | TB16Pix Dataset | <https://w3id.org/dggs/tb16pix>
-2 | Collections | <https://w3id.org/dggs/tb16pix/resolution/>
-3 | Collection 'Resolution 2' | <https://w3id.org/dggs/tb16pix/resolution/2>
-4 | Features within 'Resolution 2' | <https://w3id.org/dggs/tb16pix/resolution/2/cell/>
-5 | Feature 'Cell N21' | <https://w3id.org/dggs/tb16pix/cell/N21> 
+2 | Collections | <https://w3id.org/dggs/tb16pix/grid/>
+3 | Collection 'Grid 2' | <https://w3id.org/dggs/tb16pix/grid/2>
+4 | Features within 'Grid 2' | <https://w3id.org/dggs/tb16pix/grid/2/zone/>
+5 | Feature 'Zone N21' | <https://w3id.org/dggs/tb16pix/zone/N21> 
 
 ### OGC API URIs
 *These are numbered with correspondence to the PIDs above.*
@@ -26,9 +26,12 @@ No | Resource | URI
 --- | --- | ---
 1 | API Landing Page | <https://dggs.org/> 
 2 | Collections | <https://dggs.org/collections> 
-3 | Collection 'Resolution 2' | <https://dggs.org/collections/2>
-4 | Features within 'Resolution 2' | <https://dggs.org/collections/2/items>
-5 | Feature 'Cell N21' | <https://dggs.org/collections/2/items/N21>
+3 | Collection 'Grid 2' | <https://dggs.org/collections/2>
+4 | Features within 'Grid 2' | <https://dggs.org/collections/2/items>
+5 | Feature 'Grid N21' | <https://dggs.org/collections/2/items/N21>
+
+Geometries - DGGS Cells - are separate things. Currently they do have PID URIs (e.g. 
+[https://w3id.org/dggs/tb16pix/cell/R232](https://w3id.org/dggs/tb16pix/cell/R232)) but don't have a place in the OGC API URIS.
 
 ## License
 The content of this repository are licensed using the [GPL 3.0 license](https://www.gnu.org/licenses/quick-guide-gplv3.html). See the the [LICENSE file](LICENSE) for details
