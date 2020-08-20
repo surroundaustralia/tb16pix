@@ -108,12 +108,12 @@ def items(collection_id):
         if LOCAL_URIS:
             features.append((
                 url_for("item", collection_id=collection_id, item_id=str(cell)),
-                "Zone {}".format(str(cell))
+                "Cell {}".format(str(cell))
             ))
         else:
             features.append((
-                URI_BASE_ZONE[str(cell)],
-                "Zone {}".format(str(cell))
+                URI_BASE_CELL[str(cell)],
+                "Cell {}".format(str(cell))
             ))
 
     return render_template(
@@ -129,7 +129,7 @@ def item(collection_id, item_id):
     if item_id == "Earth":
         return EarthRenderer(request, item_id).render()
     else:
-        return ZoneRenderer(request, item_id).render()
+        return CellRenderer(request, item_id).render()
 
 
 @app.route("/object")

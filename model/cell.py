@@ -1,8 +1,8 @@
 from flask import Response, render_template
-from rdflib import Graph, URIRef, Literal, RDF, RDFS, BNode
+from rdflib import Graph, URIRef, Literal
+from rdflib.namespace import DCTERMS, RDF, RDFS
 from .profiles import *
 from config import *
-from utils import calculate_neighbours, calculate_children, calculate_parent
 
 
 class Cell:
@@ -12,6 +12,7 @@ class Cell:
     ):
         self.uri = URI_BASE_CELL[cell_id]
         self.label = "Cell {}".format(cell_id)
+        self.isPartOf = URI_BASE_GRID[str(len(cell_id) - 1)], "Grid {}".format(str(len(cell_id) - 1))
         self.asDGGS = "<https://w3id.org/dggs/tb16pix> {}".format(cell_id)
 
 
@@ -49,8 +50,9 @@ class CellRenderer(Renderer):
             Literal("<httpss://w3id.org/dggs/tb16pix> {}".format(item_id), datatype=GEOX.dggsLiteral)
         ))
 
-        item_graph.add((item_uri, GEOX.isGeometryOf, URIRef(URI_BASE_ZONE+item_id)))
+        item_graph.add((item_uri, DCTERMS.isPartOf, URIRef(self.zone.isPartOf[0])))
 
+        item_graph.add((item_uri, GEOX.isGeometryOf, URIRef(URI_BASE_GRID+item_id)))
 
         # serialise in the appropriate RDF format
         if self.mediatype in ["application/rdf+json", "application/json"]:
@@ -62,6 +64,7 @@ class CellRenderer(Renderer):
         _template_context = {
             "uri": self.zone.uri,
             "label": self.zone.label,
+            "isPartOf": self.zone.isPartOf,
             "asDGGS": self.zone.asDGGS,
         }
 

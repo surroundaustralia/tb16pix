@@ -1,8 +1,8 @@
 {% extends "page.html" %}
 {% block content %}
   <h1>Collection: {{ collection_name }}</h1>
-  <h2>Features</h2>
+  <h2>Items</h2>
   <ul>
-    <li><a href="{{ url_for("items", collection_id=collection_id) }}">Features</a></li>
+    <li><a href="{{ url_for("items", collection_id=collection_id) }}">Cells</a></li>
   </ul>
 {% endblock %}

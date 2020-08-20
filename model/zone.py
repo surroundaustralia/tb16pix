@@ -15,7 +15,6 @@ class Zone:
         self.parent = calculate_parent(zone_id)
         self.neighbours = [(URI_BASE_ZONE[x[1]], x[1], x[0]) for x in calculate_neighbours(zone_id)]
         self.children = calculate_children(zone_id)
-        self.isPartOf = URI_BASE_GRID[str(len(zone_id) - 1)]
         self.defaultGeometry = (URI_BASE_CELL[zone_id], "Cell " + zone_id)
 
 
@@ -78,7 +77,6 @@ class ZoneRenderer(Renderer):
             "parent": self.zone.parent,
             "neighbours": self.zone.neighbours,
             "children": self.zone.children,
-            "isPartOf": self.zone.isPartOf,
             "defaultGeometry": self.zone.defaultGeometry,
         }
 

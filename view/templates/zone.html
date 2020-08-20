@@ -4,16 +4,8 @@
   <dl>
     <dt>URI</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object", uri=uri) }}{% else %}{{ uri }}{% endif %}">{{ uri }}</a></dd>
-    <dt>Label</dt>
-    <dd>{{ label }}</dd>
-    <dt>Is Part of Collection</dt>
-    {% if LOCAL_URIS %}
-      <dd><a href="{{ url_for("object", uri=isPartOf) }}">{{ isPartOf }}</a></dd>
-    {% else %}
-      <dd><a href="{{ isPartOf }}">{{ isPartOf }}</a></dd>
-    {% endif %}
     <dt>Parent</dt>
-    <dd><a href="{% if LOCAL_URIS %}{{ url_for("object", uri=parent[0]) }}{% else %}{{ parent[0] }}{% endif %}">Zone {{ parent[1] }}</a></dd>
+    <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ parent[0] }}">Zone {{ parent[1] }}</a></dd>
     <dt>Neighbours</dt>
     <dd>
       <div style="display: grid; grid-template-columns: 100px 100px 100px; grid-template-rows: 50px 50px 50px; text-align:center;">
@@ -32,7 +24,7 @@
           {% set r = 2 %}
         {% endif %}
         <div style="grid-column: {{ c }}; grid-row: {{ r }};">
-        <a href="{% if LOCAL_URIS %}{{ url_for("object", uri=x[0]) }}{% else %}{{ x[0] }}{% endif %}">Zone {{ x[1] }}</a>
+        <a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ x[0] }}">Zone {{ x[1] }}</a>
         </div>
         <div style="grid-column: 2; grid-row: 2;">{{ label }}</div>
       {% endfor %}

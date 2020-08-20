@@ -4,8 +4,8 @@
   <dl>
     <dt>URI</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ uri }}">{{ uri }}</a></dd>
-    <dt>Label</dt>
-    <dd>{{ label }}</dd>
+    <dt>Is Part of Collection</dt>
+    <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ isPartOf[0] }}">{{ isPartOf[1] }}</a></dd>
     <dt>Coordinates</dt>
     <dd><code>{{ asDGGS }}</code></dd>
   </dl>
