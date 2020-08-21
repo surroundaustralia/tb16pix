@@ -1,10 +1,15 @@
 {% extends "page.html" %}
 {% block content %}
-  <h1>Items in Collection {{ collection_name }}</h1>
-  <h2>Items</h2>
-  <ul>
-  {% for item in items %}
-    <li><a href="{{ item[0] }}">{{ item[1] }}</a></li>
-  {% endfor %}
-  </ul>
+  <div>
+    <h1>Items in Collection {{ collection_name }}</h1>
+  </div>
+  <div id="maincontent">
+    <h2>Items</h2>
+    <ul>
+    {% for item in items %}
+      <li><a href="{{ item[0] }}">{{ item[1] }}</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% include 'page_altprofiles.html' %}
 {% endblock %}

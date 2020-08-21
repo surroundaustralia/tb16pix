@@ -1,14 +1,20 @@
 {% extends "page.html" %}
 {% block content %}
-  <h1>Geometry: {{ label }}</h1>
-  <dl>
+  <div>
+    <h1>Geometry: {{ label }}</h1>
+  </div>
+  <div id="maincontent">
+    <dl>
     <dt>URI</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ uri }}">{{ uri }}</a></dd>
     <dt>Is Part of Collection</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ isPartOf[0] }}">{{ isPartOf[1] }}</a></dd>
     <dt>Coordinates</dt>
     <dd><code>{{ asDGGS }}</code></dd>
+    <dt>Is Geometry of</dt>
+    <dd><a href="{% if LOCAL_URIS %}{{ url_for("object") }}?uri={% endif %}{{ isGeometryOf[0] }}">{{ isGeometryOf[1] }}</a></dd>
   </dl>
+  </div>
   <div id="altprofiles">
     <h4>Alternates Profiles</h4>
     <p>Different views of and formats:</p>

@@ -89,7 +89,9 @@ def get_collections():
         for o in g.objects(subject=s, predicate=RDFS.label):
             collections.append((str(s), str(o)))
 
-    return sorted(collections)
+    collections = sorted(collections)
+    collections.insert(0, collections.pop(-1))  # move Earth to first place
+    return collections
 
 
 if __name__ == "__main__":

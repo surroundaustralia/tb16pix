@@ -14,6 +14,7 @@ class Cell:
         self.label = "Cell {}".format(cell_id)
         self.isPartOf = URI_BASE_GRID[str(len(cell_id) - 1)], "Grid {}".format(str(len(cell_id) - 1))
         self.asDGGS = "<https://w3id.org/dggs/tb16pix> {}".format(cell_id)
+        self.isGeometryOf = URI_BASE_ZONE[cell_id], "Zone {}".format(cell_id)
 
 
 class CellRenderer(Renderer):
@@ -47,12 +48,12 @@ class CellRenderer(Renderer):
         item_graph.add((
             item_uri,
             GEOX.asDGGS,
-            Literal("<httpss://w3id.org/dggs/tb16pix> {}".format(item_id), datatype=GEOX.dggsLiteral)
+            Literal("<https://w3id.org/dggs/tb16pix> {}".format(item_id), datatype=GEOX.dggsLiteral)
         ))
 
         item_graph.add((item_uri, DCTERMS.isPartOf, URIRef(self.zone.isPartOf[0])))
 
-        item_graph.add((item_uri, GEOX.isGeometryOf, URIRef(URI_BASE_GRID+item_id)))
+        item_graph.add((item_uri, GEOX.isGeometryOf, URIRef(self.zone.isGeometryOf[0])))
 
         # serialise in the appropriate RDF format
         if self.mediatype in ["application/rdf+json", "application/json"]:
@@ -66,6 +67,7 @@ class CellRenderer(Renderer):
             "label": self.zone.label,
             "isPartOf": self.zone.isPartOf,
             "asDGGS": self.zone.asDGGS,
+            "isGeometryOf": self.zone.isGeometryOf
         }
 
         return Response(

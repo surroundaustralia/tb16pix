@@ -1,6 +1,9 @@
 {% extends "page.html" %}
 {% block content %}
-  <h1>Feature: {{ label }}</h1>
+  <div>
+    <h1>Feature: {{ label }}</h1>
+  </div>
+  <div id="maincontent">
   <dl>
     <dt>URI</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object", uri=uri) }}{% else %}{{ uri }}{% endif %}">{{ uri }}</a></dd>
@@ -69,12 +72,6 @@
     <dt>Geometry</dt>
     <dd><a href="{% if LOCAL_URIS %}{{ url_for("object", uri=defaultGeometry[0]) }}{% else %}{{ defaultGeometry[0] }}{% endif %}">{{ defaultGeometry[1] }}</a></dd>
   </dl>
-  <div id="altprofiles">
-    <h4>Alternates Profiles</h4>
-    <p>Different views of and formats:</p>
-    <p>
-      <a href="?_profile=alt">Alternate Profiles</a>
-      <span class="tooltip" style="font-weight:bold;">?<span class="tooltiptext">Different Media Types (HTML, text, RDF, JSON etc.) and different information model views, <em>profiles</em>, are available for this resource.</span></span>
-    </p>
   </div>
+  {% include 'page_altprofiles.html' %}
 {% endblock %}
